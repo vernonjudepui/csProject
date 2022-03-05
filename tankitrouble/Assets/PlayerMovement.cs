@@ -8,8 +8,14 @@ public class PlayerMovement : MonoBehaviour
     public float move;
     public float rotation;
     public float rotateSpeed = 200f;
-    public Rigidbody2D rb;
+    public float posx1 = -7f;
+    public float posy1= -4.5f;
 
+    public Rigidbody2D rb;
+    void Start() {
+        transform.position = new Vector3(posx1, posy1,-1);
+
+    }
     // Update is called once per frame
     void Update()
     {

@@ -23,7 +23,19 @@ public class bulletBehaviour : MonoBehaviour
             Destroy(col.gameObject);
             Destroy(this.gameObject);
         }
-//        if(col.gameO)
+        if (col.gameObject.name == "tank(Clone)") {
+            Destroy(col.gameObject);
+            Destroy(this.gameObject);
+            GlobalVariables.p2Score += 1;
+
+        }
+        if (col.gameObject.name == "p2(Clone)")
+        {
+            Destroy(col.gameObject);
+            Destroy(this.gameObject);
+            GlobalVariables.p1Score += 1;
+
+        }
     }
     void Awake()
     {

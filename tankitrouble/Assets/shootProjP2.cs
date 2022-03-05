@@ -19,7 +19,7 @@ public class shootProjP2 : MonoBehaviour
         {
             GameObject ball = Instantiate(projectile, transform.position,
                                                     transform.rotation);
-            Physics2D.IgnoreCollision(ball.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+
             ball.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0, launchSpeed));
         }
 

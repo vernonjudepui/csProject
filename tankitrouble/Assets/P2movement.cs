@@ -8,8 +8,16 @@ public class P2movement: MonoBehaviour
     public float move;
     public float rotation;
     public float rotateSpeed = 200f;
-    public Rigidbody2D rb;
+    public float posx = 7f;
+    public float posy = 4.5f;
 
+    public Rigidbody2D rb;
+    void Start() {
+
+        transform.position = new Vector3(posx, posy,-1);
+
+
+    }
     // Update is called once per frame
     void Update()
     {
