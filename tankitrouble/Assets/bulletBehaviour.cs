@@ -23,7 +23,7 @@ public class bulletBehaviour : MonoBehaviour
             Destroy(col.gameObject);
             Destroy(this.gameObject);
         }
-        if(col.gameO)
+//        if(col.gameO)
     }
     void Awake()
     {
