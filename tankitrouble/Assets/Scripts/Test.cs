@@ -5,6 +5,6 @@ using UnityEngine;
 public class Test : MonoBehaviour
 {
     private void Start() {
-        Grid grid = new Grid(4, 2,3f);
+        //Grid grid = new Grid(4, 2,3f);
     }
 }

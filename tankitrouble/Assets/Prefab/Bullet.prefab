@@ -134,4 +134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c2993fba13a77849891a48e939d84c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 2
+  p1Fab: {fileID: 7589862085297241289, guid: 36eb422e9ec61034a98cf197f173cd74, type: 3}
+  p2Fab: {fileID: 5909837838829530424, guid: fbe5bc09c7ea4d44cb7e0addf4d2a946, type: 3}
+  t1: {fileID: 1547991062634119588, guid: 8da6ec61b742fc9479e0728780947dab, type: 3}
+  t2: {fileID: 3373947938545928775, guid: dd1696606a2d79e4ca5971d777300aed, type: 3}
+  lifetime: 3

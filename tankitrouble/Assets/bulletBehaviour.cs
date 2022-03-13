@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class bulletBehaviour : MonoBehaviour
 {
+    public GameObject p1Fab;
+    public GameObject p2Fab;
+    public UnityEngine.UI.Text t1;
+    public UnityEngine.UI.Text t2;
+    private float initTime;
     // Start is called before the first frame update
     void Start()
     {
-        
+        initTime = Time.time;
     }
 
     // Update is called once per frame
@@ -16,6 +22,7 @@ public class bulletBehaviour : MonoBehaviour
         
     }
     public float lifetime = 4.0f;
+    
     void OnCollisionEnter2D(Collision2D col)
     {
 
@@ -23,19 +30,43 @@ public class bulletBehaviour : MonoBehaviour
             Destroy(col.gameObject);
             Destroy(this.gameObject);
         }
-        if (col.gameObject.name == "tank(Clone)") {
-            Destroy(col.gameObject);
-            Destroy(this.gameObject);
-            GlobalVariables.p2Score += 1;
-
-        }
-        if (col.gameObject.name == "p2(Clone)")
+        if (Time.time - initTime > 0.05)
         {
-            Destroy(col.gameObject);
-            Destroy(this.gameObject);
-            GlobalVariables.p1Score += 1;
+            if (col.gameObject.name == "tank(Clone)")
+            {
+                Destroy(col.gameObject);
+                Destroy(this.gameObject);
+                GlobalVariables.p2Score += 1;
+                Debug.Log(GlobalVariables.p2Score);
+                UpdateScore();
 
+                GameObject hand = GameObject.Find("p2(Clone)");
+                GameObject p1 = Instantiate(p1Fab, new Vector3(-7f, -4.5f, -1),
+                                                    Quaternion.Euler(Vector3.forward));
+                hand.transform.rotation = Quaternion.Euler(Vector3.forward);
+                hand.transform.position = new Vector3(7f, 4.5f, -1);
+            }
+
+        
+            if (col.gameObject.name == "p2(Clone)")
+            {
+                Destroy(col.gameObject);
+                Destroy(this.gameObject);
+                GlobalVariables.p1Score += 1;
+                UpdateScore();
+                GameObject tank = GameObject.Find("tank(Clone)");
+                GameObject p2 = Instantiate(p2Fab, new Vector3(7f, 4.5f, -1),
+                                                            Quaternion.Euler(Vector3.forward));
+                p2.transform.rotation = Quaternion.Euler(Vector3.forward);
+                p2.transform.position = new Vector3(-7f, -4.5f, -1);
         }
+           
+        }
+    }
+    void UpdateScore() {
+        t1.text = GlobalVariables.p1Score+"";
+        t2.text = GlobalVariables.p2Score+"";
+      
     }
     void Awake()
     {

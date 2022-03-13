@@ -307,7 +307,7 @@ MonoBehaviour:
   moveSpeed: 3.5
   move: 0
   rotation: 0
-  rotateSpeed: 200
+  rotateSpeed: 170
   posx: 7
   posy: 4.5
   rb: {fileID: 5909837838829530405}
