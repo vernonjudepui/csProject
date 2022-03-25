@@ -57,8 +57,8 @@ public class bulletBehaviour : MonoBehaviour
                 GameObject tank = GameObject.Find("tank(Clone)");
                 GameObject p2 = Instantiate(p2Fab, new Vector3(7f, 4.5f, -1),
                                                             Quaternion.Euler(Vector3.forward));
-                p2.transform.rotation = Quaternion.Euler(Vector3.forward);
-                p2.transform.position = new Vector3(-7f, -4.5f, -1);
+                tank.transform.rotation = Quaternion.Euler(Vector3.forward);
+                tank.transform.position = new Vector3(-7f, -4.5f, -1);
         }
            
         }
