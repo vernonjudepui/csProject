@@ -1,0 +1,51 @@
+{
+    "RedTank": {
+        "checkpoints": [
+            {
+                "steps": 2441,
+                "file_path": "results\\tank\\RedTank\\RedTank-2441.onnx",
+                "reward": null,
+                "creation_time": 1648367200.604593,
+                "auxillary_file_paths": [
+                    "results\\tank\\RedTank\\RedTank-2441.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2441,
+            "file_path": "results\\tank\\RedTank.onnx",
+            "reward": null,
+            "creation_time": 1648367200.604593,
+            "auxillary_file_paths": [
+                "results\\tank\\RedTank\\RedTank-2441.pt"
+            ]
+        }
+    },
+    "GreenTank": {
+        "checkpoints": [
+            {
+                "steps": 2441,
+                "file_path": "results\\tank\\GreenTank\\GreenTank-2441.onnx",
+                "reward": null,
+                "creation_time": 1648367200.6889546,
+                "auxillary_file_paths": [
+                    "results\\tank\\GreenTank\\GreenTank-2441.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2441,
+            "file_path": "results\\tank\\GreenTank.onnx",
+            "reward": null,
+            "creation_time": 1648367200.6889546,
+            "auxillary_file_paths": [
+                "results\\tank\\GreenTank\\GreenTank-2441.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.11.0+cpu"
+    }
+}
