@@ -9,6 +9,7 @@ public class bulletBehaviour : MonoBehaviour
   public GameObject p2Fab;
   public UnityEngine.UI.Text t1;
   public UnityEngine.UI.Text t2;
+  public string FiredBy = "";
   private float initTime;
   // Start is called before the first frame update
   void Start()
@@ -37,7 +38,10 @@ public class bulletBehaviour : MonoBehaviour
       {
         // Destroy(col.gameObject);
         col.gameObject.GetComponent<TankAgent>().died = true;
-        GameObject.Find("p2(Clone)").GetComponent<TankAgent>().killedEnemy = true;
+        Debug.Log(FiredBy);
+        if(FiredBy =="")
+
+            GameObject.Find("p2(Clone)").GetComponent<TankAgent>().killedEnemy = true;
         Destroy(this.gameObject);
         GlobalVariables.p2Score += 1;
         Debug.Log(GlobalVariables.p2Score);
@@ -54,7 +58,9 @@ public class bulletBehaviour : MonoBehaviour
       if (col.gameObject.name == "p2(Clone)")
       {
         // Destroy(col.gameObject);
+
         col.gameObject.GetComponent<TankAgent>().died = true;
+        if(FiredBy == "P2")
         GameObject.Find("tank(Clone)").GetComponent<TankAgent>().killedEnemy = true;
         Destroy(this.gameObject);
         GlobalVariables.p1Score += 1;

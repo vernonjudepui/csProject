@@ -19,8 +19,10 @@ public class shootProjP2 : MonoBehaviour
         {
             GameObject ball = Instantiate(projectile, transform.position,
                                                     transform.rotation);
+            bulletBehaviour thing = ball.GetComponent<bulletBehaviour>();
 
             ball.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0, launchSpeed));
+            thing.FiredBy = "P2";
         }
 
 

@@ -72,30 +72,34 @@ public class TankAgent : Agent
       ball.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0, launchSpeed));
     }
 
-
+   float reward = 0f;
     // Rewards
     float distanceToTarget = Vector3.Distance(transform.localPosition, enemyTank.transform.localPosition);
 
     // Eliminated target
-    if (killedEnemy)
-    {
-      Debug.Log(gameObject.name + " eliminated target");
-      SetReward(100f);
-      EndEpisode();
-    }
+    //if (killedEnemy)
+    //{
+     // Debug.Log(gameObject.name + " eliminated target");
+      //reward += 1000f;
+ 
+      //SetReward(reward);
+      //EndEpisode();
+    //}
 
     // Got killed
+    /*
     else if (died)
     {
       Debug.Log(gameObject.name + " died");
-      SetReward(-100f);
+      
+      SetReward(-100f+18f-distanceToTarget);
       EndEpisode();
     }
-
-    else
-    {
+    */
+    //else
+    //{
       SetReward(18f - distanceToTarget);
-    }
+   // }
   }
 
   public override void Heuristic(in ActionBuffers actionsOut)
