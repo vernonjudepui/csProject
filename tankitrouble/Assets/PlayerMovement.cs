@@ -40,18 +40,18 @@ public class PlayerMovement : MonoBehaviour
     //input   
     move = Input.GetAxis("Vertical");
     rotation = Input.GetAxis("Horizontal");
-    // for (int i = 0; i < 8; i++)
-    // {
-    //   float angle = i * 45;
-    //   Vector2 direction = (transform.rotation * Vector2.up);
-    //   RaycastHit2D[] results = new RaycastHit2D[16];
-    //   if (Physics2D.Raycast(transform.localPosition, direction.Rotate(angle), new ContactFilter2D().NoFilter(), results, 100f) > 0)
-    //   {
-    //     Vector2 point = results[1].collider.gameObject.name == "p2(Clone)" ? (Vector2)(results[1].transform.localPosition) : results[1].point;
-    //     float distance = Vector2.Distance(transform.localPosition, point);
-    //     Debug.DrawRay(transform.position, direction.Rotate(angle) * distance, Color.red);
-    //   }
-    // }
+    for (int i = 0; i < 8; i++)
+    {
+      float angle = i * 45;
+      Vector2 direction = (transform.rotation * Vector2.up);
+      RaycastHit2D[] results = new RaycastHit2D[16];
+      if (Physics2D.Raycast(transform.localPosition, direction.Rotate(angle), new ContactFilter2D().NoFilter(), results, 100f) > 0)
+      {
+        // Vector2 point = results[1].collider.gameObject.name == "p2(Clone)" ? (Vector2)(results[1].transform.localPosition) : results[1].point;
+        float distance = Vector2.Distance(transform.localPosition, results[1].point);
+        Debug.DrawRay(transform.position, direction.Rotate(angle) * distance, Color.red);
+      }
+    }
   }
   void FixedUpdate()
   {

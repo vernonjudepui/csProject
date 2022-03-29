@@ -222,8 +222,8 @@ GameObject:
   - component: {fileID: 5909837838829530405}
   - component: {fileID: 5909837838829530427}
   - component: {fileID: 5909837838829530426}
-  - component: {fileID: 620406797936756126}
-  - component: {fileID: 2361577781644579400}
+  - component: {fileID: 7929408846606083124}
+  - component: {fileID: 322867217042539344}
   - component: {fileID: 2620996498969570113}
   m_Layer: 0
   m_Name: p2
@@ -314,16 +314,16 @@ MonoBehaviour:
   posx: 7
   posy: 4.5
   rb: {fileID: 5909837838829530405}
---- !u!114 &620406797936756126
+--- !u!114 &7929408846606083124
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5909837838829530424}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3da777b9e02c9f849a30e80d734da4cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 52a961c76edf1244a81266362eb342fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agentParameters:
@@ -335,7 +335,7 @@ MonoBehaviour:
   startPosition: {x: 7, y: 4.5, z: -1}
   died: 0
   killedEnemy: 0
---- !u!114 &2361577781644579400
+--- !u!114 &322867217042539344
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

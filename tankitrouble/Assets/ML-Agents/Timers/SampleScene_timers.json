@@ -1,1 +1,32 @@
-{"count":1,"self":38.706108799999996,"total":39.3686733,"children":{"InitializeActuators":{"count":2,"self":0.0019974,"total":0.0019974,"children":null},"InitializeSensors":{"count":2,"self":0.0020388999999999997,"total":0.0020388999999999997,"children":null},"AgentSendState":{"count":1751,"self":0.0030405,"total":0.012110399999999999,"children":{"CollectObservations":{"count":352,"self":0.0070265,"total":0.0070265,"children":null},"WriteActionMask":{"count":352,"self":0,"total":0,"children":null},"RequestDecision":{"count":352,"self":0.0020434,"total":0.0020434,"children":null}}},"DecideAction":{"count":1751,"self":0.0073291,"total":0.0073291,"children":null},"AgentAct":{"count":1751,"self":0.6380882,"total":0.6380882,"children":null}},"gauges":{"RedTank.CumulativeReward":{"count":3,"max":658.5541,"min":269.3819,"runningAverage":455.310333,"value":269.3819,"weightedAverage":519.9062},"GreenTank.CumulativeReward":{"count":3,"max":678.985657,"min":123.50367,"runningAverage":369.372742,"value":678.985657,"weightedAverage":364.81958}},"metadata":{"timer_format_version":"0.1.0","start_time_seconds":"1648547288","unity_version":"2020.3.16f1","command_line_arguments":"C:\\Program Files\\Unity\\Hub\\Editor\\2020.3.16f1\\Editor\\Unity.exe -projectpath C:\\Users\\mrkin\\JJ\\school\\cs-project\\csProject\\tankitrouble -useHub -hubIPC -cloudEnvironment production -licensingIpc LicenseClient-mrkin -hubSessionId d9e75990-af43-11ec-99a4-c551fb59ecbd -accessToken 0OEO_lnOBgPRiDKNpMbebeawyDnYpV3aho1ALpXW-r8011f","communication_protocol_version":"1.5.0","com.unity.ml-agents_version":"2.0.1","scene_name":"SampleScene","end_time_seconds":"1648547328"}}
+{
+  "count": 1,
+  "self": 19.093608,
+  "total": 19.1105944,
+  "children": {
+    "InitializeActuators": { "count": 1, "self": 0.0009994, "total": 0.0009994, "children": null },
+    "InitializeSensors": { "count": 1, "self": 0.0020085, "total": 0.0020085, "children": null },
+    "AgentSendState": {
+      "count": 161,
+      "self": 0.0019863,
+      "total": 0.0059837,
+      "children": {
+        "CollectObservations": { "count": 17, "self": 0.0020123, "total": 0.0020123, "children": null },
+        "WriteActionMask": { "count": 17, "self": 0, "total": 0, "children": null },
+        "RequestDecision": { "count": 17, "self": 0.0019851, "total": 0.0019851, "children": null }
+      }
+    },
+    "DecideAction": { "count": 161, "self": 0.0039926, "total": 0.0039926, "children": null },
+    "AgentAct": { "count": 161, "self": 0.0040027, "total": 0.0040027, "children": null }
+  },
+  "gauges": {},
+  "metadata": {
+    "timer_format_version": "0.1.0",
+    "start_time_seconds": "1648541982",
+    "unity_version": "2020.3.16f1",
+    "command_line_arguments": "C:\\Program Files\\Unity\\Hub\\Editor\\2020.3.16f1\\Editor\\Unity.exe -projectpath C:\\Users\\Vernon Pui\\Documents\\GitHub\\csProject\\tankitrouble -useHub -hubIPC -cloudEnvironment production -licensingIpc LicenseClient-Vernon Pui -hubSessionId c481eb10-abe2-11ec-90e8-cfc23350c528 -accessToken ZeDmlsVIUqYEuq6HuK_-u3DZBIC_eWFyl19NetfLpG4011f -projectpath C:\\Users\\Vernon Pui\\Documents\\GitHub\\csProject\\tankitrouble -useHub -hubIPC -cloudEnvironment production -licensingIpc LicenseClient-Vernon Pui -hubSessionId c481eb10-abe2-11ec-90e8-cfc23350c528 -accessToken c504qk5h2WW4heNA0UFFBtx0-QGE4b_t1dRzXsWPI14011f",
+    "communication_protocol_version": "1.5.0",
+    "com.unity.ml-agents_version": "2.0.1",
+    "scene_name": "SampleScene",
+    "end_time_seconds": "1648542002"
+  }
+}

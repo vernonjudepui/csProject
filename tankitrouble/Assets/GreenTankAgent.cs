@@ -5,15 +5,13 @@ using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
 
-public class TankAgent : Agent
+public class GreenTankAgent : Agent
 {
   public GameObject enemyTank;
   public GameObject bulletPrefab;
   public Vector3 startPosition;
   public bool died;
   public bool killedEnemy;
-  public float timeTaken = 0f;
-
 
   public override void OnEpisodeBegin()
   {
@@ -53,58 +51,55 @@ public class TankAgent : Agent
 
   public override void OnActionReceived(ActionBuffers actionBuffers)
   {
-    float moveSpeed = 5f; //5f;
-    float rotateSpeed = 80f; // 200f;
-    timeTaken+=1;
-
+    float moveSpeed = 5f;
+    float rotateSpeed = 200f;
     // Actions, size = 2
     float move = actionBuffers.ContinuousActions[0];
     float rotation = actionBuffers.ContinuousActions[1];
     int fire = actionBuffers.DiscreteActions[0];
 
-    // Debug.Log(fire);
+    Debug.Log(fire);
 
     transform.Translate(0f, move * moveSpeed * Time.fixedDeltaTime, 0f);
     transform.Rotate(0f, 0f, rotation * -rotateSpeed * Time.fixedDeltaTime);
 
 
     // fire
-    // if (fire == 1)
-    // {
-    //   float launchSpeed = 1000f;
-    //   GameObject ball = Instantiate(bulletPrefab, transform.position, transform.rotation);
-    //   ball.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0, launchSpeed));
-    // }
+    if (fire == 1)
+    {
+      float launchSpeed = 1000f;
+      GameObject ball = Instantiate(bulletPrefab, transform.position, transform.rotation);
+      ball.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0, launchSpeed));
+    }
 
    float reward = 0f;
     // Rewards
     float distanceToTarget = Vector3.Distance(transform.localPosition, enemyTank.transform.localPosition);
-    if(timeTaken >2000){
-      timeTaken = 0;
+
+    // Eliminated target
+    //if (killedEnemy)
+    //{
+     // Debug.Log(gameObject.name + " eliminated target");
+      //reward += 1000f;
+ 
+      //SetReward(reward);
+      //EndEpisode();
+    //}
+
+    // Got killed
+    /*
+    else if (died)
+    {
+      Debug.Log(gameObject.name + " died");
+      
+      SetReward(-100f+18f-distanceToTarget);
       EndEpisode();
     }
-    // Eliminated target
-    // if (killedEnemy)
-    // {
-    //  Debug.Log(gameObject.name + " eliminated target");
-    //   reward += 1000f;
- 
-    //   SetReward(reward);
-    //   EndEpisode();
-    // }
-
-    // // Got killed
-    // else if (died)
-    // {
-    //   Debug.Log(gameObject.name + " died");
-      
-    //   SetReward(-100f+18f-distanceToTarget);
-    //   EndEpisode();
-    // }
-    // else
-    // {
-      SetReward((18f - distanceToTarget-timeTaken/1000)/18);
-  //  }
+    */
+    //else
+    //{
+      SetReward(18f - distanceToTarget);
+   // }
   }
 
   public override void Heuristic(in ActionBuffers actionsOut)
