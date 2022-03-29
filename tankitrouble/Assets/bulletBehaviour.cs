@@ -41,7 +41,7 @@ public class bulletBehaviour : MonoBehaviour
         Debug.Log(FiredBy);
         if(FiredBy =="")
 
-            GameObject.Find("p2(Clone)").GetComponent<TankAgent>().killedEnemy = true;
+          GameObject.Find("p2(Clone)").GetComponent<GreenTankAgent>().killedEnemy = true;
         Destroy(this.gameObject);
         GlobalVariables.p2Score += 1;
         Debug.Log(GlobalVariables.p2Score);
@@ -59,7 +59,7 @@ public class bulletBehaviour : MonoBehaviour
       {
         // Destroy(col.gameObject);
 
-        col.gameObject.GetComponent<TankAgent>().died = true;
+        col.gameObject.GetComponent<GreenTankAgent>().died = true;
         if(FiredBy == "P2")
         GameObject.Find("tank(Clone)").GetComponent<TankAgent>().killedEnemy = true;
         Destroy(this.gameObject);

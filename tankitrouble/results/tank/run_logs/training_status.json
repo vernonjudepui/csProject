@@ -1,45 +1,23 @@
 {
-    "GreenTank": {
-        "checkpoints": [
-            {
-                "steps": 7616,
-                "file_path": "results\\tank\\GreenTank\\GreenTank-7616.onnx",
-                "reward": null,
-                "creation_time": 1648451340.5256343,
-                "auxillary_file_paths": [
-                    "results\\tank\\GreenTank\\GreenTank-7616.pt"
-                ]
-            }
-        ],
-        "final_checkpoint": {
-            "steps": 7616,
-            "file_path": "results\\tank\\GreenTank.onnx",
-            "reward": null,
-            "creation_time": 1648451340.5256343,
-            "auxillary_file_paths": [
-                "results\\tank\\GreenTank\\GreenTank-7616.pt"
-            ]
-        }
-    },
     "RedTank": {
         "checkpoints": [
             {
-                "steps": 7616,
-                "file_path": "results\\tank\\RedTank\\RedTank-7616.onnx",
-                "reward": null,
-                "creation_time": 1648451340.8126297,
+                "steps": 16116,
+                "file_path": "results\\tank\\RedTank\\RedTank-16116.onnx",
+                "reward": 99.03571820259094,
+                "creation_time": 1648541972.4286215,
                 "auxillary_file_paths": [
-                    "results\\tank\\RedTank\\RedTank-7616.pt"
+                    "results\\tank\\RedTank\\RedTank-16116.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 7616,
+            "steps": 16116,
             "file_path": "results\\tank\\RedTank.onnx",
-            "reward": null,
-            "creation_time": 1648451340.8126297,
+            "reward": 99.03571820259094,
+            "creation_time": 1648541972.4286215,
             "auxillary_file_paths": [
-                "results\\tank\\RedTank\\RedTank-7616.pt"
+                "results\\tank\\RedTank\\RedTank-16116.pt"
             ]
         }
     },
