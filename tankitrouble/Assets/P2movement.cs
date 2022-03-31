@@ -2,61 +2,62 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class P2movement: MonoBehaviour
+public class P2movement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float move;
-    public float rotation;
-    public float rotateSpeed = 200f;
-    public float posx = 7f;
-    public float posy = 4.5f;
+  public float moveSpeed = 5f;
+  public float move;
+  public float rotation;
+  public float rotateSpeed = 200f;
+  public float posx = 7f;
+  public float posy = 4.5f;
 
-    public Rigidbody2D rb;
-    void Start() {
+  public Rigidbody2D rb;
+  void Start()
+  {
 
-        transform.position = new Vector3(posx, posy,-1);
+    transform.localPosition = new Vector3(posx, posy, -1);
 
 
-    }
-    // Update is called once per frame
-    void Update()
+  }
+  // Update is called once per frame
+  void Update()
+  {
+    move = 0;
+    rotation = 0;
+    if (Input.GetKey(KeyCode.W))
     {
-        move = 0;
-        rotation = 0;
-        if (Input.GetKey(KeyCode.W))
-        {
-            move += 1;
-        
-        }
-         if (Input.GetKey(KeyCode.A))
-        {
+      move += 1;
 
-            rotation -= 1;
-
-        }
-         if (Input.GetKey(KeyCode.S))
-        {
-
-            move -= 1;
-
-        }
-         if (Input.GetKey(KeyCode.D))
-        {
-
-            rotation += 1;
-
-        }
-        //input   
-        //move = Input.GetAxis("Vertical");
-        //rotation = Input.GetAxis("Horizontal");
     }
-    void FixedUpdate()
+    if (Input.GetKey(KeyCode.A))
     {
-        //movement
-        transform.Translate(0f, move * moveSpeed * Time.fixedDeltaTime, 0f);
-        transform.Rotate(0f, 0f, rotation * -rotateSpeed * Time.fixedDeltaTime);
+
+      rotation -= 1;
 
     }
+    if (Input.GetKey(KeyCode.S))
+    {
+
+      move -= 1;
+
+    }
+    if (Input.GetKey(KeyCode.D))
+    {
+
+      rotation += 1;
+
+    }
+    //input   
+    //move = Input.GetAxis("Vertical");
+    //rotation = Input.GetAxis("Horizontal");
+  }
+  void FixedUpdate()
+  {
+    //movement
+    transform.Translate(0f, move * moveSpeed * Time.fixedDeltaTime, 0f);
+    transform.Rotate(0f, 0f, rotation * -rotateSpeed * Time.fixedDeltaTime);
+
+  }
 
 }
 

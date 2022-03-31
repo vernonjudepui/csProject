@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
   public Rigidbody2D rb;
   void Start()
   {
-    transform.position = new Vector3(posx1, posy1, -1);
+    transform.localPosition = new Vector3(posx1, posy1, -1);
 
   }
   // Update is called once per frame
@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
       {
         // Vector2 point = results[1].collider.gameObject.name == "p2(Clone)" ? (Vector2)(results[1].transform.localPosition) : results[1].point;
         float distance = Vector2.Distance(transform.localPosition, results[1].point);
-        Debug.DrawRay(transform.position, direction.Rotate(angle) * distance, Color.red);
+        Debug.DrawRay(transform.localPosition, direction.Rotate(angle) * distance, Color.red);
       }
     }
   }

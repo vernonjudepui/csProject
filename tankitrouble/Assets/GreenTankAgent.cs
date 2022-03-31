@@ -18,7 +18,7 @@ public class GreenTankAgent : Agent
     Debug.Log("episode begin");
     died = false;
     killedEnemy = false;
-    gameObject.transform.position = startPosition;
+    gameObject.transform.localPosition = startPosition;
     gameObject.transform.rotation = Quaternion.Euler(Vector3.forward);
     gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0f;
@@ -42,7 +42,7 @@ public class GreenTankAgent : Agent
       if (Physics2D.Raycast(transform.localPosition, direction.Rotate(angle), new ContactFilter2D().NoFilter(), results, 100f) > 0)
       {
         float distance = Vector2.Distance(transform.localPosition, results[1].point);
-        // Debug.DrawRay(transform.position, direction.Rotate(angle) * distance, Color.red);
+        // Debug.DrawRay(transform.localPosition, direction.Rotate(angle) * distance, Color.red);
         distances[i] = distance;
       }
     }
@@ -68,22 +68,22 @@ public class GreenTankAgent : Agent
     if (fire == 1)
     {
       float launchSpeed = 1000f;
-      GameObject ball = Instantiate(bulletPrefab, transform.position, transform.rotation);
+      GameObject ball = Instantiate(bulletPrefab, transform.localPosition, transform.rotation);
       ball.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0, launchSpeed));
     }
 
-   float reward = 0f;
+    float reward = 0f;
     // Rewards
     float distanceToTarget = Vector3.Distance(transform.localPosition, enemyTank.transform.localPosition);
 
     // Eliminated target
     //if (killedEnemy)
     //{
-     // Debug.Log(gameObject.name + " eliminated target");
-      //reward += 1000f;
- 
-      //SetReward(reward);
-      //EndEpisode();
+    // Debug.Log(gameObject.name + " eliminated target");
+    //reward += 1000f;
+
+    //SetReward(reward);
+    //EndEpisode();
     //}
 
     // Got killed
@@ -98,8 +98,8 @@ public class GreenTankAgent : Agent
     */
     //else
     //{
-      SetReward(18f - distanceToTarget);
-   // }
+    SetReward(18f - distanceToTarget);
+    // }
   }
 
   public override void Heuristic(in ActionBuffers actionsOut)

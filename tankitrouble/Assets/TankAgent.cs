@@ -12,26 +12,33 @@ public class TankAgent : Agent
   public Vector3 startPosition;
   public bool died;
   public bool killedEnemy;
-  public float timeTaken = 0f;
+
+  private float timeTaken = 0f;
 
 
   public override void OnEpisodeBegin()
   {
+    timeTaken = 0f;
     Debug.Log("episode begin");
     died = false;
     killedEnemy = false;
-    gameObject.transform.position = startPosition;
+    gameObject.transform.localPosition = new Vector3(-7, -7, -1);
     gameObject.transform.rotation = Quaternion.Euler(Vector3.forward);
     gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0f;
-    // gameObject.GetComponent<Rigidbody2D>().
+    // temporary
+    enemyTank.transform.localPosition = new Vector3(Random.Range(-7, 7), Random.Range(-7, 7), -1);
+    enemyTank.transform.rotation = Quaternion.Euler(Vector3.forward);
+    enemyTank.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+    enemyTank.GetComponent<Rigidbody2D>().angularVelocity = 0f;
   }
 
   public override void CollectObservations(VectorSensor sensor)
   {
     // Target and Agent positions
     sensor.AddObservation(enemyTank.transform.localPosition);
-    sensor.AddObservation(transform.rotation);
+    sensor.AddObservation(transform.rotation.eulerAngles[2]);
+    sensor.AddObservation(transform.rotation * Vector2.up);
     sensor.AddObservation(transform.localPosition);
 
     // Distance to walls in 8 directions
@@ -44,51 +51,54 @@ public class TankAgent : Agent
       if (Physics2D.Raycast(transform.localPosition, direction.Rotate(angle), new ContactFilter2D().NoFilter(), results, 100f) > 0)
       {
         float distance = Vector2.Distance(transform.localPosition, results[1].point);
-        // Debug.DrawRay(transform.position, direction.Rotate(angle) * distance, Color.red);
+        // Debug.DrawRay(transform.localPosition, direction.Rotate(angle) * distance, Color.red);
         distances[i] = distance;
       }
     }
     sensor.AddObservation(distances);
+
+    AddReward(-0.01f);
+    timeTaken += 1;
+    if (timeTaken > 2000)
+    {
+      float distanceToTarget = Vector3.Distance(transform.localPosition, enemyTank.transform.localPosition);
+      AddReward(-distanceToTarget / 20f);
+      EndEpisode();
+    }
   }
 
   public override void OnActionReceived(ActionBuffers actionBuffers)
   {
     float moveSpeed = 5f; //5f;
-    float rotateSpeed = 80f; // 200f;
-    timeTaken+=1;
+    float rotateSpeed = 200f; // 200f;
 
     // Actions, size = 2
     float move = actionBuffers.ContinuousActions[0];
     float rotation = actionBuffers.ContinuousActions[1];
-    int fire = actionBuffers.DiscreteActions[0];
+    // int fire = actionBuffers.DiscreteActions[0];
 
     // Debug.Log(fire);
 
-    transform.Translate(0f, move * moveSpeed * Time.fixedDeltaTime, 0f);
-    transform.Rotate(0f, 0f, rotation * -rotateSpeed * Time.fixedDeltaTime);
+    transform.Translate(0, move * moveSpeed * Time.fixedDeltaTime, 0f);
+    transform.Rotate(0f, 0f, rotation * rotateSpeed * Time.fixedDeltaTime);
 
 
     // fire
     // if (fire == 1)
     // {
     //   float launchSpeed = 1000f;
-    //   GameObject ball = Instantiate(bulletPrefab, transform.position, transform.rotation);
+    //   GameObject ball = Instantiate(bulletPrefab, transform.localPosition, transform.rotation);
     //   ball.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0, launchSpeed));
     // }
 
-   float reward = 0f;
     // Rewards
     float distanceToTarget = Vector3.Distance(transform.localPosition, enemyTank.transform.localPosition);
-    if(timeTaken >2000){
-      timeTaken = 0;
-      EndEpisode();
-    }
     // Eliminated target
     // if (killedEnemy)
     // {
     //  Debug.Log(gameObject.name + " eliminated target");
     //   reward += 1000f;
- 
+
     //   SetReward(reward);
     //   EndEpisode();
     // }
@@ -97,14 +107,15 @@ public class TankAgent : Agent
     // else if (died)
     // {
     //   Debug.Log(gameObject.name + " died");
-      
+
     //   SetReward(-100f+18f-distanceToTarget);
     //   EndEpisode();
     // }
     // else
     // {
-      SetReward((18f - distanceToTarget-timeTaken/1000)/18);
-  //  }
+    // AddReward((20f - distanceToTarget) / 20f);
+    //  }
+
   }
 
   public override void Heuristic(in ActionBuffers actionsOut)
@@ -114,5 +125,21 @@ public class TankAgent : Agent
     continuousActionsOut[1] = Input.GetAxis("Horizontal");
     var discreteActionsOut = actionsOut.DiscreteActions;
     discreteActionsOut[0] = Input.GetKeyDown(KeyCode.Space) ? 1 : 0;
+  }
+
+
+  void OnCollisionEnter2D(Collision2D col)
+  {
+    if (col.gameObject.name == "p2(Clone)")
+    {
+      AddReward(3f);
+      EndEpisode();
+    }
+    else if (col.gameObject.tag == "wall")
+    {
+      float distanceToTarget = Vector3.Distance(transform.localPosition, enemyTank.transform.localPosition);
+      AddReward(-2f - distanceToTarget / 20f);
+      EndEpisode();
+    }
   }
 }

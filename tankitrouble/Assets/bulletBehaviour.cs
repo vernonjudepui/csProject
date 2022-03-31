@@ -39,7 +39,7 @@ public class bulletBehaviour : MonoBehaviour
         // Destroy(col.gameObject);
         col.gameObject.GetComponent<TankAgent>().died = true;
         Debug.Log(FiredBy);
-        if(FiredBy =="")
+        if (FiredBy == "")
 
           GameObject.Find("p2(Clone)").GetComponent<GreenTankAgent>().killedEnemy = true;
         Destroy(this.gameObject);
@@ -51,7 +51,7 @@ public class bulletBehaviour : MonoBehaviour
         // GameObject p1 = Instantiate(p1Fab, new Vector3(-7f, -4.5f, -1),
         //                                     Quaternion.Euler(Vector3.forward));
         // hand.transform.rotation = Quaternion.Euler(Vector3.forward);
-        // hand.transform.position = new Vector3(7f, 4.5f, -1);
+        // hand.transform.localPosition = new Vector3(7f, 4.5f, -1);
       }
 
 
@@ -60,8 +60,8 @@ public class bulletBehaviour : MonoBehaviour
         // Destroy(col.gameObject);
 
         col.gameObject.GetComponent<GreenTankAgent>().died = true;
-        if(FiredBy == "P2")
-        GameObject.Find("tank(Clone)").GetComponent<TankAgent>().killedEnemy = true;
+        if (FiredBy == "P2")
+          GameObject.Find("tank(Clone)").GetComponent<TankAgent>().killedEnemy = true;
         Destroy(this.gameObject);
         GlobalVariables.p1Score += 1;
         UpdateScore();
@@ -69,7 +69,7 @@ public class bulletBehaviour : MonoBehaviour
         // GameObject p2 = Instantiate(p2Fab, new Vector3(7f, 4.5f, -1),
         //                                             Quaternion.Euler(Vector3.forward));
         // tank.transform.rotation = Quaternion.Euler(Vector3.forward);
-        // tank.transform.position = new Vector3(-7f, -4.5f, -1);
+        // tank.transform.localPosition = new Vector3(-7f, -4.5f, -1);
       }
 
     }
