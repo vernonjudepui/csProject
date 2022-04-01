@@ -1,0 +1,30 @@
+{
+    "Tank": {
+        "elo": 1172.823721170619,
+        "checkpoints": [
+            {
+                "steps": 1006,
+                "file_path": "results\\tank_full\\Tank\\Tank-1006.onnx",
+                "reward": null,
+                "creation_time": 1648782559.3478515,
+                "auxillary_file_paths": [
+                    "results\\tank_full\\Tank\\Tank-1006.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1006,
+            "file_path": "results\\tank_full\\Tank.onnx",
+            "reward": null,
+            "creation_time": 1648782559.3478515,
+            "auxillary_file_paths": [
+                "results\\tank_full\\Tank\\Tank-1006.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.11.0+cpu"
+    }
+}
