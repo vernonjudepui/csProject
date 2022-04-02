@@ -7,7 +7,7 @@ class TankAI : MonoBehaviour {
     public GameObject bulletPrefab;
     public bool showGizmos = false;
     public float stoppingDist = 2.4f;
-    public float speed = 40f;
+    public float speed = 2f;
     public float turnSpeed = 4f;
 
     float timeToNextFire = 0f;
@@ -80,7 +80,7 @@ class TankAI : MonoBehaviour {
 
     void FireBullet() {
         float launchSpeed = 200f;
-        GameObject ball = Instantiate(bulletPrefab, transform.position, transform.rotation);
+        GameObject ball = Instantiate(bulletPrefab, transform.position + transform.rotation * Vector2.up * 2, transform.rotation);
         ball.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0, launchSpeed));
     }
 
