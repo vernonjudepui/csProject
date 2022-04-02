@@ -14,23 +14,24 @@ public class TankAgent : Agent
   public bool killedEnemy;
 
   private float timeTaken = 0f;
-
+  private float timeTillNextFire = 0f;
 
   public override void OnEpisodeBegin()
   {
     timeTaken = 0f;
+    timeTillNextFire = 0f;
     Debug.Log("episode begin");
     died = false;
     killedEnemy = false;
-    gameObject.transform.localPosition = startPosition;
+    gameObject.transform.localPosition = new Vector2(Random.Range(0, 7), Random.Range(0, 7));
     gameObject.transform.rotation = Quaternion.Euler(Vector3.forward);
     gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0f;
     // temporary
     //enemyTank.transform.localPosition = new Vector3(Random.Range(-7, 7), Random.Range(-7, 7), -1);
-   // enemyTank.transform.rotation = Quaternion.Euler(Vector3.forward);
-   // enemyTank.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-   //enemyTank.GetComponent<Rigidbody2D>().angularVelocity = 0f;
+    // enemyTank.transform.rotation = Quaternion.Euler(Vector3.forward);
+    // enemyTank.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+    //enemyTank.GetComponent<Rigidbody2D>().angularVelocity = 0f;
   }
 
   public override void CollectObservations(VectorSensor sensor)
@@ -59,16 +60,18 @@ public class TankAgent : Agent
 
     GameObject[] allBullets = GameObject.FindGameObjectsWithTag("bullet");
     int numClosest = 4; // gives position of 4 nearest bullets
-    
+
     SortedList<float, GameObject> bulletDistances = new SortedList<float, GameObject>(numClosest);
-    foreach (GameObject bullet in allBullets) {
+    foreach (GameObject bullet in allBullets)
+    {
       bulletDistances.Add(Vector2.Distance(transform.localPosition, bullet.transform.localPosition), bullet);
     }
-    foreach (GameObject bullet in bulletDistances.Values) {
+    foreach (GameObject bullet in bulletDistances.Values)
+    {
       sensor.AddObservation(bullet.transform.localPosition);
       sensor.AddObservation(bullet.GetComponent<Rigidbody2D>().velocity);
     }
-    
+
 
     AddReward(-0.01f);
     timeTaken += 1;
@@ -97,19 +100,21 @@ public class TankAgent : Agent
 
 
     // fire
-    if (fire == 1)
+    if (fire == 1 && timeTaken > timeTillNextFire)
     {
       float launchSpeed = 1000f;
-       GameObject ball = Instantiate(bulletPrefab, transform.localPosition, transform.rotation);
-       ball.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0, launchSpeed));
-     }
+      GameObject ball = Instantiate(bulletPrefab, transform.localPosition, transform.rotation);
+      ball.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0, launchSpeed));
+      AddReward(-0.1f);
+      timeTillNextFire = timeTillNextFire + 100f;
+    }
 
     // Rewards
     float distanceToTarget = Vector3.Distance(transform.localPosition, enemyTank.transform.localPosition);
     //Eliminated target
     if (killedEnemy)
     {
-     Debug.Log(gameObject.name + " eliminated target");
+      Debug.Log(gameObject.name + " eliminated target");
 
 
       AddReward(10f);
@@ -117,14 +122,14 @@ public class TankAgent : Agent
     }
 
     // // Got killed
-     else if (died)
+    else if (died)
     {
-       Debug.Log(gameObject.name + " died");
+      Debug.Log(gameObject.name + " died");
 
-      AddReward(-5f-distanceToTarget/20);
-       EndEpisode();
-     }
-    
+      AddReward(-5f - distanceToTarget / 20);
+      EndEpisode();
+    }
+
 
   }
 
@@ -135,22 +140,6 @@ public class TankAgent : Agent
     continuousActionsOut[1] = Input.GetAxis("Horizontal");
     var discreteActionsOut = actionsOut.DiscreteActions;
     discreteActionsOut[0] = Input.GetKeyDown(KeyCode.Space) ? 1 : 0;
-  }
-
-
-  void OnCollisionEnter2D(Collision2D col)
-  {
-    if (col.gameObject.name == "p2(Clone)")
-    {
-      AddReward(3f);
-      EndEpisode();
-    }
-    // else if (col.gameObject.tag == "wall")
-    // {
-    //   float distanceToTarget = Vector3.Distance(transform.localPosition, enemyTank.transform.localPosition);
-    //   AddReward(-2f - distanceToTarget / 20f);
-    //   EndEpisode();
-    // }
   }
 }
 // }using System.Collections;
@@ -266,7 +255,7 @@ public class TankAgent : Agent
 //       AddReward(-10f-distanceToTarget/20);
 //        EndEpisode();
 //      }
-    
+
 
 //   }
 

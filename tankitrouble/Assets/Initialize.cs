@@ -16,9 +16,9 @@ public class Initialize : MonoBehaviour
     GlobalVariables.p2Score = 0;
     // t1.text = GlobalVariables.p1Score + "";
     // t2.text = GlobalVariables.p2Score + "";
-    GameObject p1 = Instantiate(p1Fab, transform.parent.position + new Vector3(-7, -4.5f, -1),
+    GameObject p1 = Instantiate(p1Fab, new Vector3(-7f, -4.5f, -1),
                                                 transform.rotation);
-    GameObject p2 = Instantiate(p2Fab, transform.parent.position + new Vector3(7, 4.5f, -1),
+    GameObject p2 = Instantiate(p2Fab, new Vector3(7f, 4.5f, -1),
                                                 transform.rotation);
     p1.transform.parent = transform;
     p2.transform.parent = transform;
