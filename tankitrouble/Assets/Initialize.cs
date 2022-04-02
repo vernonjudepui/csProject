@@ -12,8 +12,8 @@ public class Initialize : MonoBehaviour {
     void Start() {
         GlobalVariables.p1Score = 0;
         GlobalVariables.p2Score = 0;
-        // t1.text = GlobalVariables.p1Score + "";
-        // t2.text = GlobalVariables.p2Score + "";
+        t1.text = GlobalVariables.p1Score + "";
+        t2.text = GlobalVariables.p2Score + "";
         // GameObject p1 = Instantiate(p1Fab, new Vector3(-7f, -4.5f, -1),
         //                                             transform.rotation);
         // GameObject p2 = Instantiate(p2Fab, new Vector3(7f, 4.5f, -1),

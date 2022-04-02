@@ -60,8 +60,8 @@ public class Pathfinding : MonoBehaviour {
         int distX = Mathf.Abs(a.gridX - b.gridX);
         int distY = Mathf.Abs(a.gridY - b.gridY);
 
-        if (distX > distY) return 30 * distY + 10 * (distX - distY); // 14
-        return 30 * distX + 10 * (distY - distX); // set to 30 to prevent diagonal movement
+        if (distX > distY) return 14 * distY + 10 * (distX - distY); // 14
+        return 14 * distX + 10 * (distY - distX); // set to 30 to prevent diagonal movement
     }
 
     List<Node> RetracePath(Node startNode, Node endNode) {

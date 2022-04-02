@@ -28,13 +28,11 @@ public class bulletBehaviour : MonoBehaviour {
             Destroy(this.gameObject);
         }
         // if (Time.time - initTime > 0.05) {
-        if (col.gameObject.name == "tank(Clone)") {
-            // Destroy(col.gameObject);
+        if (col.gameObject.name == "tank") {
             col.gameObject.GetComponent<TankAgent>().died = true;
-            Debug.Log(FiredBy);
             if (FiredBy == "")
 
-                GameObject.Find("p2(Clone)").GetComponent<TankAgent>().killedEnemy = true;
+                GameObject.Find("p2").GetComponent<TankAgent>().killedEnemy = true;
             Destroy(this.gameObject);
             col.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             col.gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0;
@@ -50,12 +48,10 @@ public class bulletBehaviour : MonoBehaviour {
         }
 
 
-        if (col.gameObject.name == "p2(Clone)") {
-            // Destroy(col.gameObject);
-
+        if (col.gameObject.name == "p2") {
             col.gameObject.GetComponent<TankAgent>().died = true;
             if (FiredBy == "P2")
-                GameObject.Find("tank(Clone)").GetComponent<TankAgent>().killedEnemy = true;
+                GameObject.Find("tank").GetComponent<TankAgent>().killedEnemy = true;
             Destroy(this.gameObject);
             col.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             col.gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0;

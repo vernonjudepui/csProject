@@ -21,7 +21,7 @@ class TankAI : MonoBehaviour {
         // StartCoroutine("FollowPath");
     }
 
-    Path path;
+    // Path path;
 
     void Update() {
         List<Node> pathNodes = pathfinding.FindPath();
@@ -29,6 +29,11 @@ class TankAI : MonoBehaviour {
         if (pathNodes.Count < 1) return;
         Vector2 direction = (pathNodes[0].position - (Vector2)transform.position).normalized;
 
+        if (Vector2.Distance(transform.position, pathfinding.target.transform.position) < stoppingDist) {
+            direction = Vector2.zero;
+        }
+
+        // dodge bullets
         GameObject[] allBullets = GameObject.FindGameObjectsWithTag("bullet");
         Debug.Log(allBullets.Length);
         int numClosest = Mathf.Min(4, allBullets.Length); // checks 4 nearest bullets
@@ -65,7 +70,7 @@ class TankAI : MonoBehaviour {
         }
         Vector2 direction = pathfinding.target.position - transform.position;
         RaycastHit2D[] results = new RaycastHit2D[4];
-        if (Physics2D.Raycast(transform.localPosition, direction, new ContactFilter2D().NoFilter(), results, 100f) > 0) {
+        if (Physics2D.Raycast(transform.localPosition, direction, new ContactFilter2D().NoFilter(), results, 20f) > 0) {
             if (results[1].collider.gameObject.transform == pathfinding.target) {
                 transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan(direction.y / direction.x) - 90);
                 // Debug.DrawRay(transform.position, direction, Color.red);
