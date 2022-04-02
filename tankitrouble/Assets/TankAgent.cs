@@ -23,7 +23,7 @@ public class TankAgent : Agent
     Debug.Log("episode begin");
     died = false;
     killedEnemy = false;
-    gameObject.transform.localPosition = new Vector2(Random.Range(0, 7), Random.Range(0, 7));
+    gameObject.transform.localPosition = startPosition;
     gameObject.transform.rotation = Quaternion.Euler(Vector3.forward);
     gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0f;
@@ -75,12 +75,12 @@ public class TankAgent : Agent
 
     AddReward(-0.01f);
     timeTaken += 1;
-    if (timeTaken > 2000)
-    {
-      float distanceToTarget = Vector3.Distance(transform.localPosition, enemyTank.transform.localPosition);
-      AddReward(-distanceToTarget / 20f);
-      EndEpisode();
-    }
+    // if (timeTaken > 2000)
+    // {
+    //   float distanceToTarget = Vector3.Distance(transform.localPosition, enemyTank.transform.localPosition);
+    //   AddReward(-distanceToTarget / 20f);
+    //   EndEpisode();
+    // }
   }
 
   public override void OnActionReceived(ActionBuffers actionBuffers)
@@ -103,8 +103,9 @@ public class TankAgent : Agent
     if (fire == 1 && timeTaken > timeTillNextFire)
     {
       float launchSpeed = 1000f;
-      GameObject ball = Instantiate(bulletPrefab, transform.localPosition, transform.rotation);
+      GameObject ball = Instantiate(bulletPrefab, transform.position, transform.rotation);
       ball.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0, launchSpeed));
+      // ball.GetComponent<Rigidbody2D>().velocity = new Vector2(0, launchSpeed);
       AddReward(-0.1f);
       timeTillNextFire = timeTillNextFire + 100f;
     }

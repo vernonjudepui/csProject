@@ -82,6 +82,6 @@ public class bulletBehaviour : MonoBehaviour
   }
   void Awake()
   {
-    Destroy(this.gameObject, lifetime);
+    // Destroy(this.gameObject, lifetime);
   }
 }
