@@ -73,18 +73,13 @@ public class TankAgent : Agent
     }
 
 
-    AddReward(-0.01f);
-    timeTaken += 1;
-    // if (timeTaken > 2000)
-    // {
-    //   float distanceToTarget = Vector3.Distance(transform.localPosition, enemyTank.transform.localPosition);
-    //   AddReward(-distanceToTarget / 20f);
-    //   EndEpisode();
-    // }
+    AddReward(-0.001f);
+    
   }
 
   public override void OnActionReceived(ActionBuffers actionBuffers)
   {
+    
     float moveSpeed = 5f; //5f;
     float rotateSpeed = 200f; // 200f;
 
@@ -106,8 +101,11 @@ public class TankAgent : Agent
       GameObject ball = Instantiate(bulletPrefab, transform.position, transform.rotation);
       ball.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0, launchSpeed));
       // ball.GetComponent<Rigidbody2D>().velocity = new Vector2(0, launchSpeed);
-      AddReward(-0.1f);
-      timeTillNextFire = timeTillNextFire + 100f;
+     bulletBehaviour thing = ball.GetComponent<bulletBehaviour>();
+     thing.FiredBy = "P2";
+      AddReward(-0.001f);
+      Debug.Log("Fired by" +gameObject.name );
+      timeTillNextFire = timeTaken + 200f;
     }
 
     // Rewards
@@ -121,7 +119,12 @@ public class TankAgent : Agent
       AddReward(10f);
       EndEpisode();
     }
-
+    timeTaken += 1;
+    if (timeTaken > 2000)
+    {
+      AddReward(distanceToTarget / 20f);
+      EndEpisode();
+    }
     // // Got killed
     else if (died)
     {

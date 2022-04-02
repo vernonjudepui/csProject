@@ -1,0 +1,39 @@
+{
+    "Tank": {
+        "elo": 333.18203435622263,
+        "checkpoints": [
+            {
+                "steps": 13894,
+                "file_path": "results\\tank_final\\Tank\\Tank-13894.onnx",
+                "reward": null,
+                "creation_time": 1648902890.4210832,
+                "auxillary_file_paths": [
+                    "results\\tank_final\\Tank\\Tank-13894.pt"
+                ]
+            },
+            {
+                "steps": 113232,
+                "file_path": "results\\tank_final\\Tank\\Tank-113232.onnx",
+                "reward": -5.422561764717102,
+                "creation_time": 1648908608.2825866,
+                "auxillary_file_paths": [
+                    "results\\tank_final\\Tank\\Tank-113232.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 113232,
+            "file_path": "results\\tank_final\\Tank.onnx",
+            "reward": -5.422561764717102,
+            "creation_time": 1648908608.2825866,
+            "auxillary_file_paths": [
+                "results\\tank_final\\Tank\\Tank-113232.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.11.0+cpu"
+    }
+}

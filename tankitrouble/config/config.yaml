@@ -21,12 +21,12 @@ behaviors:
         gamma: 0.99
         strength: 1.0
       curiosity:
-        strength: 0.04
+        strength: 0.1
         gamma: 0.86
         network_settings:
           hidden_units: 128
         learning_rate: 1e-3
-    max_steps: 300000
+    max_steps: 3000000
     time_horizon: 64
     summary_freq: 400
     self_play:
