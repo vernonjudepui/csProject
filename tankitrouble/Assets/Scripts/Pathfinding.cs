@@ -13,7 +13,7 @@ public class Pathfinding : MonoBehaviour {
         Node start = grid.NodeFromWorldPos(startPos);
         Node targetNode = grid.NodeFromWorldPos(targetPos);
 
-        // Debug.Log("finding path from " + start.gridX + "," + start.gridY + " to " + target.gridX + "," + target.gridY + ".");
+        // Debug.Log("finding path from " + start.gridX + "," + start.gridY + " to " + targetNode.gridX + "," + targetNode.gridY + ".");
 
         List<Node> openSet = new List<Node>();
         HashSet<Node> closedSet = new HashSet<Node>();
@@ -60,8 +60,21 @@ public class Pathfinding : MonoBehaviour {
         int distX = Mathf.Abs(a.gridX - b.gridX);
         int distY = Mathf.Abs(a.gridY - b.gridY);
 
-        if (distX > distY) return 30 * distY + 10 * (distX - distY); // 14
-        return 30 * distX + 10 * (distY - distX); // set to 30 to prevent diagonal movement
+        // tank cant navigate corners well
+        if (distX == 1 && distY == 1) {
+            bool aWalkable = grid.grid[a.gridX, b.gridY].walkable;
+            bool bWalkable = grid.grid[b.gridX, a.gridY].walkable;
+            if (!aWalkable && !bWalkable) {
+                // cant go through here at all
+                return 1000;
+            }
+            if (!aWalkable || !bWalkable) {
+                return 30; // set to 30 to prevent diagonal movement
+            }
+        }
+
+        if (distX > distY) return 14 * distY + 10 * (distX - distY);
+        return 14 * distX + 10 * (distY - distX);
     }
 
     List<Node> RetracePath(Node startNode, Node endNode) {

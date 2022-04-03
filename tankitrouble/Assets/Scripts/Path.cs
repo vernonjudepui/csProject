@@ -42,7 +42,7 @@ public class Path {
 
         Gizmos.color = Color.red;
         foreach (Line l in turnBoundaries) {
-            l.DrawWithGizmos(10);
+            l.DrawWithGizmos(4);
         }
 
     }
