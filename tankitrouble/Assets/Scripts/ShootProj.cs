@@ -17,7 +17,7 @@ public class ShootProj : MonoBehaviour
   {
     if (Input.GetKeyDown(KeyCode.Space))
     {
-      GameObject ball = Instantiate(projectile, transform.localPosition,
+      GameObject ball = Instantiate(projectile, transform.position,
                                               transform.rotation);
 
       ball.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0, launchSpeed));

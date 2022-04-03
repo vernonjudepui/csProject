@@ -24,7 +24,7 @@ public class TankAgent : Agent
         died = false;
         killedEnemy = false;
         gameObject.transform.localPosition = startPosition;
-        gameObject.transform.rotation = Quaternion.Euler(Vector3.forward);
+        gameObject.transform.rotation = Quaternion.Euler(Vector3.forward + new Vector3(0f, 0f, 20f));
         gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0f;
         // temporary
@@ -70,7 +70,7 @@ public class TankAgent : Agent
         SortedList<float, GameObject> bulletDistances = new SortedList<float, GameObject>(numClosest);
         foreach (GameObject bullet in allBullets)
         {
-            bulletDistances.Add(Vector2.Distance(transform.localPosition, bullet.transform.localPosition), bullet);
+            bulletDistances.Add(Vector2.Distance(bullet.transform.position, transform.position), bullet);
         }
         foreach (GameObject bullet in bulletDistances.Values)
         {
@@ -79,7 +79,7 @@ public class TankAgent : Agent
         }
 
 
-        AddReward(-0.001f);
+        AddReward(-0.01f);
 
     }
 
@@ -99,36 +99,37 @@ public class TankAgent : Agent
         transform.Translate(0, move * moveSpeed * Time.fixedDeltaTime, 0f);
         transform.Rotate(0f, 0f, rotation * rotateSpeed * Time.fixedDeltaTime);
 
-
+        Vector2 direction = (transform.rotation * Vector2.up);
         // fire
         if (fire == 1 && timeTaken > timeTillNextFire)
         {
-            float launchSpeed = 1000f;
-            GameObject ball = Instantiate(bulletPrefab, transform.position, transform.rotation);
+            float launchSpeed = 300f;
+            Debug.Log(transform.position);
+
+            GameObject ball = Instantiate(bulletPrefab, transform.position + new Vector3(direction[0] * 0.65f, direction[1] * 0.65f, -1f), transform.rotation);
             ball.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0, launchSpeed));
             // ball.GetComponent<Rigidbody2D>().velocity = new Vector2(0, launchSpeed);
             bulletBehaviour thing = ball.GetComponent<bulletBehaviour>();
-            thing.FiredBy = "P2";
-            AddReward(-0.001f);
+            thing.FiredBy = gameObject.name;
+            AddReward(0.01f);
             Debug.Log("Fired by" + gameObject.name);
-            timeTillNextFire = timeTaken + 200f;
+            timeTillNextFire = timeTaken + 300f;
         }
 
         // Rewards
         float distanceToTarget = Vector3.Distance(transform.localPosition, enemyTank.transform.localPosition);
+        //Debug.Log(distanceToTarget+"asadasd");
         //Eliminated target
         if (killedEnemy)
         {
-            Debug.Log(gameObject.name + " eliminated target");
 
-
-            AddReward(10f);
+            AddReward(20f);
             EndEpisode();
         }
         timeTaken += 1;
         if (timeTaken > 2000)
         {
-            AddReward(distanceToTarget / 20f);
+            AddReward(3 - distanceToTarget / 10f);
             EndEpisode();
         }
         // // Got killed
@@ -136,11 +137,9 @@ public class TankAgent : Agent
         {
             Debug.Log(gameObject.name + " died");
 
-            AddReward(-5f - distanceToTarget / 20);
+            AddReward(-20f - distanceToTarget / 10f);
             EndEpisode();
         }
-
-
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
