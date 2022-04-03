@@ -1,33 +1,60 @@
 {
     "Tank": {
-        "elo": 333.18203435622263,
+        "elo": 1015.8463825721323,
         "checkpoints": [
             {
-                "steps": 13894,
-                "file_path": "results\\tank_final\\Tank\\Tank-13894.onnx",
+                "steps": 374142,
+                "file_path": "results\\tank_final\\Tank\\Tank-374142.onnx",
                 "reward": null,
-                "creation_time": 1648902890.4210832,
+                "creation_time": 1648957172.997415,
                 "auxillary_file_paths": [
-                    "results\\tank_final\\Tank\\Tank-13894.pt"
+                    "results\\tank_final\\Tank\\Tank-374142.pt"
                 ]
             },
             {
-                "steps": 113232,
-                "file_path": "results\\tank_final\\Tank\\Tank-113232.onnx",
-                "reward": -5.422561764717102,
-                "creation_time": 1648908608.2825866,
+                "steps": 499992,
+                "file_path": "results\\tank_final\\Tank\\Tank-499992.onnx",
+                "reward": 1.7987065091729164,
+                "creation_time": 1648964077.617222,
                 "auxillary_file_paths": [
-                    "results\\tank_final\\Tank\\Tank-113232.pt"
+                    "results\\tank_final\\Tank\\Tank-499992.pt"
+                ]
+            },
+            {
+                "steps": 537539,
+                "file_path": "results\\tank_final\\Tank\\Tank-537539.onnx",
+                "reward": null,
+                "creation_time": 1648966108.8144042,
+                "auxillary_file_paths": [
+                    "results\\tank_final\\Tank\\Tank-537539.pt"
+                ]
+            },
+            {
+                "steps": 543734,
+                "file_path": "results\\tank_final\\Tank\\Tank-543734.onnx",
+                "reward": 0.2443745732307434,
+                "creation_time": 1648966518.011565,
+                "auxillary_file_paths": [
+                    "results\\tank_final\\Tank\\Tank-543734.pt"
+                ]
+            },
+            {
+                "steps": 546432,
+                "file_path": "results\\tank_final\\Tank\\Tank-546432.onnx",
+                "reward": 0.209172785282135,
+                "creation_time": 1648966725.5142045,
+                "auxillary_file_paths": [
+                    "results\\tank_final\\Tank\\Tank-546432.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 113232,
+            "steps": 546432,
             "file_path": "results\\tank_final\\Tank.onnx",
-            "reward": -5.422561764717102,
-            "creation_time": 1648908608.2825866,
+            "reward": 0.209172785282135,
+            "creation_time": 1648966725.5142045,
             "auxillary_file_paths": [
-                "results\\tank_final\\Tank\\Tank-113232.pt"
+                "results\\tank_final\\Tank\\Tank-546432.pt"
             ]
         }
     },

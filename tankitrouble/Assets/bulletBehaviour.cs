@@ -32,8 +32,9 @@ public class bulletBehaviour : MonoBehaviour
       Destroy(col.gameObject);
       Destroy(this.gameObject);
     }
-    if (Time.time - initTime > 0.05)
+    if (Time.time - initTime > 0.1)
     {
+      Debug.Log(Time.time - initTime+"asdasdasdadadadad" );
       if (col.gameObject.name == "tank(Clone)")
       {
         // Destroy(col.gameObject);
