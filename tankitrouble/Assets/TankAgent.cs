@@ -86,13 +86,13 @@ public class TankAgent : Agent
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
 
-        float moveSpeed = 5f; //5f;
-        float rotateSpeed = 200f; // 200f;
+        float moveSpeed = 1f; //5f;
+        float rotateSpeed = 40f; // 200f;
 
         // Actions, size = 2
-        float move = actionBuffers.ContinuousActions[0];
-        float rotation = actionBuffers.ContinuousActions[1];
         int fire = actionBuffers.DiscreteActions[0];
+        float move = actionBuffers.DiscreteActions[1] - 1;
+        float rotation = actionBuffers.DiscreteActions[2] - 1;
 
         // Debug.Log(fire);
 
