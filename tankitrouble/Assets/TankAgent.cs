@@ -43,11 +43,20 @@ public class TankAgent : Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         // Target and Agent positions
-        sensor.AddObservation(enemyTank.transform.localPosition);
+        sensor.AddObservation(enemyTank.transform.position);
         sensor.AddObservation(transform.rotation.eulerAngles[2]);
         sensor.AddObservation(transform.rotation * Vector2.up);
-        sensor.AddObservation(transform.localPosition);
-
+        sensor.AddObservation(transform.position);
+        sensor.AddObservation(IsTargetInLineOfSight());
+        if(timeTaken > timeTillNextFire){
+          sensor.AddObservation(true);
+        }
+        else{
+          sensor.AddObservation(false);
+        }
+    
+        float distanceToTarget = Vector3.Distance(transform.localPosition, enemyTank.transform.localPosition);
+        sensor.AddObservation(distanceToTarget);
         // Distance to walls in 8 directions
         float[] distances = new float[8];
         for (int i = 0; i < 8; i++)
@@ -63,7 +72,7 @@ public class TankAgent : Agent
             }
         }
         sensor.AddObservation(distances);
-
+        
         GameObject[] allBullets = GameObject.FindGameObjectsWithTag("bullet");
         int numClosest = 4; // gives position of 4 nearest bullets
 
@@ -79,11 +88,29 @@ public class TankAgent : Agent
         }
 
 
-        AddReward(-0.01f);
+        AddReward(-0.004f);
 
     }
 
-    public override void OnActionReceived(ActionBuffers actionBuffers)
+  bool IsTargetInLineOfSight() {
+        Vector2 direction = (transform.rotation * Vector2.up);
+        //Debug.Log("DIRECTRION"+direction);
+       
+        RaycastHit2D[] results = new RaycastHit2D[4];
+        if (Physics2D.Raycast(transform.position, direction, new ContactFilter2D().NoFilter(), results, 20f) > 0) {
+           if(results[1].collider==null)
+        return false; 
+            if (Equals(results[1].collider.gameObject.transform.name ,enemyTank.transform.name+"(Clone)")) {
+                Debug.Log("I SEE YOU");
+                return true;
+            }
+           // Debug.Log("WHISITS"+results[1].collider.gameObject.transform);
+            //Debug.Log("WW"+enemyTank.transform.name);
+        }
+
+        Debug.Log("I DONT SEE YOU");
+        return false;
+    }    public override void OnActionReceived(ActionBuffers actionBuffers)
     {
 
         float moveSpeed = 1f; //5f;
@@ -101,21 +128,30 @@ public class TankAgent : Agent
 
         Vector2 direction = (transform.rotation * Vector2.up);
         // fire
+        if(IsTargetInLineOfSight())
+          AddReward(0.01f);
         if (fire == 1 && timeTaken > timeTillNextFire)
         {
             float launchSpeed = 300f;
             Debug.Log(transform.position);
 
-            GameObject ball = Instantiate(bulletPrefab, transform.position + new Vector3(direction[0] * 0.65f, direction[1] * 0.65f, -1f), transform.rotation);
+            GameObject ball = Instantiate(bulletPrefab, transform.position + new Vector3(direction[0] * 0.63f, direction[1] * 0.63f, -1f), transform.rotation);
             ball.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0, launchSpeed));
             // ball.GetComponent<Rigidbody2D>().velocity = new Vector2(0, launchSpeed);
             bulletBehaviour thing = ball.GetComponent<bulletBehaviour>();
             thing.FiredBy = gameObject.name;
-            AddReward(0.01f);
+            AddReward(0.2f);
             Debug.Log("Fired by" + gameObject.name);
-            timeTillNextFire = timeTaken + 300f;
+            timeTillNextFire = timeTaken + 200f;
         }
+        else if (fire == 1){
+          AddReward(-0.005f);
+           Debug.Log("False Fired by" + gameObject.name+fire);
+        }
+        else if (fire == 0){
+            Debug.Log("not False Fired by" + gameObject.name+fire);
 
+        }
         // Rewards
         float distanceToTarget = Vector3.Distance(transform.localPosition, enemyTank.transform.localPosition);
         //Debug.Log(distanceToTarget+"asadasd");
@@ -123,13 +159,13 @@ public class TankAgent : Agent
         if (killedEnemy)
         {
 
-            AddReward(20f);
+            AddReward(4f+2-timeTaken/2000);
             EndEpisode();
         }
         timeTaken += 1;
         if (timeTaken > 2000)
         {
-            AddReward(3 - distanceToTarget / 10f);
+            AddReward( - distanceToTarget / 10f);
             EndEpisode();
         }
         // // Got killed
@@ -137,7 +173,7 @@ public class TankAgent : Agent
         {
             Debug.Log(gameObject.name + " died");
 
-            AddReward(-20f - distanceToTarget / 10f);
+            AddReward(-4f - distanceToTarget / 10f);  
             EndEpisode();
         }
     }

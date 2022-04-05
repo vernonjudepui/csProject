@@ -1,0 +1,66 @@
+{
+    "Tank": {
+        "elo": 1273.0106795061392,
+        "checkpoints": [
+            {
+                "steps": 73769,
+                "file_path": "results\\tank_finallllll\\Tank\\Tank-73769.onnx",
+                "reward": -0.578288733959198,
+                "creation_time": 1649045243.569343,
+                "auxillary_file_paths": [
+                    "results\\tank_finallllll\\Tank\\Tank-73769.pt"
+                ]
+            },
+            {
+                "steps": 74381,
+                "file_path": "results\\tank_finallllll\\Tank\\Tank-74381.onnx",
+                "reward": -1.0260897232219577,
+                "creation_time": 1649047830.3826287,
+                "auxillary_file_paths": [
+                    "results\\tank_finallllll\\Tank\\Tank-74381.pt"
+                ]
+            },
+            {
+                "steps": 192597,
+                "file_path": "results\\tank_finallllll\\Tank\\Tank-192597.onnx",
+                "reward": null,
+                "creation_time": 1649054998.127151,
+                "auxillary_file_paths": [
+                    "results\\tank_finallllll\\Tank\\Tank-192597.pt"
+                ]
+            },
+            {
+                "steps": 256463,
+                "file_path": "results\\tank_finallllll\\Tank\\Tank-256463.onnx",
+                "reward": 2.929309738179048,
+                "creation_time": 1649060004.9644825,
+                "auxillary_file_paths": [
+                    "results\\tank_finallllll\\Tank\\Tank-256463.pt"
+                ]
+            },
+            {
+                "steps": 366311,
+                "file_path": "results\\tank_finallllll\\Tank\\Tank-366311.onnx",
+                "reward": null,
+                "creation_time": 1649067499.5538156,
+                "auxillary_file_paths": [
+                    "results\\tank_finallllll\\Tank\\Tank-366311.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 366311,
+            "file_path": "results\\tank_finallllll\\Tank.onnx",
+            "reward": null,
+            "creation_time": 1649067499.5538156,
+            "auxillary_file_paths": [
+                "results\\tank_finallllll\\Tank\\Tank-366311.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.11.0+cpu"
+    }
+}
