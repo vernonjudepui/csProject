@@ -6,11 +6,28 @@ public class Pathfinding : MonoBehaviour {
     public Grid grid;
     public Transform target;
 
+    Node GetStartNodeFromBBox() {
+        Bounds bounds = GetComponentInChildren<Renderer>().bounds;
+        for (int x = -1; x <= 1; x += 2) {
+            for (int y = -1; y <= 1; y += 2) {
+                Vector2 newPos = new Vector2(bounds.center[0] + x * bounds.extents[0], bounds.center[1] + y * bounds.extents[1]);
+                Node node = grid.NodeFromWorldPos(newPos);
+                if (node.walkable) return node;
+            }
+        }
+        return null;
+        // return grid.NodeFromWorldPos(transform.position);
+    }
+
     public List<Node> FindPath() {
         Vector2 startPos = transform.position;
         Vector2 targetPos = target.position;
 
         Node start = grid.NodeFromWorldPos(startPos);
+        if (!start.walkable) {
+            // wrong position assigned. It probably ran into a wall
+            start = GetStartNodeFromBBox();
+        }
         Node targetNode = grid.NodeFromWorldPos(targetPos);
 
         // Debug.Log("finding path from " + start.gridX + "," + start.gridY + " to " + targetNode.gridX + "," + targetNode.gridY + ".");

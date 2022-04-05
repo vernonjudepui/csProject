@@ -24,7 +24,7 @@ class TankAI : MonoBehaviour {
         // TODO: avoid enemy if in line of fire, avoid bullets a certain distance away by moving out of line of movement
         if (IsTargetInLineOfSight()) {
             // stop following path and fire
-            // StopCoroutine("FollowPath");
+            StopCoroutine("FollowPath");
             followingPath = false;
 
             // prioritize staying alive over firing
@@ -49,12 +49,15 @@ class TankAI : MonoBehaviour {
 
     IEnumerator UpdatePath() {
         yield return new WaitForSeconds(0.2f);
+        Vector2 pos = transform.position;
         List<Node> pathNodes = pathfinding.FindPath();
-        GameObject.Find("AStar").GetComponent<Grid>().path = pathNodes;
-        List<Vector2> waypoints = pathNodes.ConvertAll<Vector2>(n => n.position);
-        path = new Path(waypoints.ToArray(), transform.localPosition, 0.8f, stoppingDist);
-        StopCoroutine("FollowPath");
-        StartCoroutine("FollowPath");
+        if (pathNodes.Count > 0) {
+            GameObject.Find("AStar").GetComponent<Grid>().path = pathNodes;
+            List<Vector2> waypoints = pathNodes.ConvertAll<Vector2>(n => n.position);
+            path = new Path(waypoints.ToArray(), transform.localPosition, 0.8f, stoppingDist);
+            StopCoroutine("FollowPath");
+            StartCoroutine("FollowPath");
+        }
     }
 
     bool IsTargetInLineOfSight() {
