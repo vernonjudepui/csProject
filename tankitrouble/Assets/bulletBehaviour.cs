@@ -26,8 +26,8 @@ public class bulletBehaviour : MonoBehaviour {
         }
         if (col.gameObject.name == "tank") {
             Destroy(this.gameObject);
-            // col.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            // col.gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0;
+            col.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            col.gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0;
             GlobalVariables.p2Score += 1;
             UpdateScore();
         }
@@ -35,8 +35,8 @@ public class bulletBehaviour : MonoBehaviour {
 
         if (col.gameObject.name == "p2") {
             Destroy(this.gameObject);
-            // col.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            // col.gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0;
+            col.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            col.gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0;
             GlobalVariables.p1Score += 1;
             UpdateScore();
         }
